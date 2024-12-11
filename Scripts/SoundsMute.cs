@@ -1,23 +1,37 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundsMute : MonoBehaviour
 {
-    private int _mute = 0;
-    private int _unmuted = 1;
-    private bool _muted = false;
+    private const int _mute = 0;
+    private const int _unmuted = 1;
 
-    public void MuteToggle()
+    [SerializeField] private Button _button;
+
+    private bool _isMuted = false;
+
+    private void OnEnable()
     {
-        if (_muted)
+        _button.onClick.AddListener(Mute);
+    }
+
+    private void OnDisable()
+    {
+        _button.onClick.RemoveListener(Mute);
+    }
+
+    private void Mute()
+    {
+        if (_isMuted)
         {
-            _muted = false;
+            _isMuted = false;
 
             AudioListener.volume = _unmuted;
             
         }
         else
         {
-            _muted = true;
+            _isMuted = true;
 
             AudioListener.volume = _mute;
         }

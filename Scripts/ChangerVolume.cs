@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 
 public class ChangerVolume : MonoBehaviour
 {
@@ -9,30 +8,14 @@ public class ChangerVolume : MonoBehaviour
     private const string MusicVolume = nameof(MusicVolume);
 
     [SerializeField] private AudioMixer _audioMixer;
-    [SerializeField] private Slider _masterSlider;
-    [SerializeField] private Slider _buttonsSlider;
-    [SerializeField] private Slider _musicSlider;
+    [SerializeField] private VolumeSlider _masterSlider;
+    [SerializeField] private VolumeSlider _buttonsSlider;
+    [SerializeField] private VolumeSlider _musicSlider;
 
-    public void SetMasterVolume()
+    private void Start()
     {
-        float volume = _masterSlider.value;
-        ChangeVolume(MasterVolume, volume);
-    }
-
-    public void SetButtonsVolume()
-    {
-        float volume = _buttonsSlider.value;
-        ChangeVolume(ButtonsVolume, volume);
-    }
-
-    public void SetMusicVolume()
-    {
-        float volume = _musicSlider.value;
-        ChangeVolume(MusicVolume, volume);
-    }
-
-    private void ChangeVolume(string nameSlider, float volume)
-    {        
-        _audioMixer.SetFloat(nameSlider, Mathf.Log10(volume) * 20);
+        _masterSlider.SetName(MasterVolume);
+        _buttonsSlider.SetName(ButtonsVolume);
+        _musicSlider.SetName(MusicVolume);
     }
 }
