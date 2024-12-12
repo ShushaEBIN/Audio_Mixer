@@ -4,10 +4,10 @@ using UnityEngine.Audio;
 
 public class VolumeSlider : MonoBehaviour
 {
-    [SerializeField] private AudioMixer _audioMixer;
-    [SerializeField] private Slider _slider;
+    private const int _multiplier = 20;
 
-    private string _parameterName;
+    [SerializeField] private AudioMixerGroup _audioGroup;
+    [SerializeField] private Slider _slider;
 
     private void OnEnable()
     {
@@ -21,11 +21,6 @@ public class VolumeSlider : MonoBehaviour
     
     private void SetVolume(float volume)
     {
-        _audioMixer.SetFloat(_parameterName, Mathf.Log10(volume) * 20);
-    }
-
-    public void SetName(string name)
-    {
-        _parameterName = name;
+        _audioGroup.audioMixer.SetFloat(_audioGroup.name, Mathf.Log10(volume) * _multiplier);
     }
 }
